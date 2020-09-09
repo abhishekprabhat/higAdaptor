@@ -192,7 +192,8 @@ public class EcosController {
 
         ecosCreateCaseDto.setReferralId(referralRequest.getReferralId());
         ecosCreateCaseDto.setReferralSource(referralRequest.getReferralSource());
-        ecosCreateCaseDto.setReferralNote(referralRequest.getReferralNote().replace("|", "\n"));
+        if(referralRequest.getReferralNote() != null)
+            ecosCreateCaseDto.setReferralNote(referralRequest.getReferralNote().replace("|", "\n"));
         return ecosCreateCaseDto;
     }
 
