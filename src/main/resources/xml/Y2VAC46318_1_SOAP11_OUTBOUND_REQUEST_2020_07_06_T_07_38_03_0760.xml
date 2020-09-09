@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<tns:Envelope xmlns:tns="http://schemas.xmlsoap.org/soap/envelope/">
+  <tns:Header>
+    <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+      <wsse:UsernameToken wsu:Id="userID" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+             <wsse:Username>?</wsse:Username>
+        <wsse:Password>?</wsse:Password>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </tns:Header>
+  <tns:Body>
+    <tns:ReferralRequest xmlns:tns="http://cfm.thehartford.com/ws/types">
+      <tns:claim_info>
+        <tns:exposure_id>cc9pte1:801408719</tns:exposure_id>
+        <tns:claim_num>46318</tns:claim_num>
+        <tns:reported_date>2020-06-22</tns:reported_date>
+        <tns:claim_status>open</tns:claim_status>
+        <tns:claim_sym>AC</tns:claim_sym>
+        <tns:loss_date>2018-04-03</tns:loss_date>
+        <tns:loss_desc>Description82</tns:loss_desc>
+        <tns:loss_loc>
+          <tns:city>Manchester</tns:city>
+          <tns:state>CT</tns:state>
+          <tns:country>US</tns:country>
+        </tns:loss_loc>
+        <tns:business_type_code>CA</tns:business_type_code>
+        <tns:business_type_desc>Commercial Auto</tns:business_type_desc>
+        <tns:lob>Commercial Auto</tns:lob>
+        <tns:claim_office>Y2V</tns:claim_office>
+        <tns:hub_office>Commercial Auto Center</tns:hub_office>
+        <tns:event_num>CA0018752917</tns:event_num>
+        <tns:vehicle>
+          <tns:uid>cc9pte1:804370164</tns:uid>
+          <tns:vin>DSFASDG5464554</tns:vin>
+          <tns:make>Undetermined</tns:make>
+          <tns:year>2010</tns:year>
+        </tns:vehicle>
+        <tns:claim_desc>IV caused accident - No contact</tns:claim_desc>
+        <tns:large_loss>false</tns:large_loss>
+        <tns:claimPlusIndicator>false</tns:claimPlusIndicator>
+        <tns:financials>
+          <tns:total_reserves>3620.82</tns:total_reserves>
+        </tns:financials>
+      </tns:claim_info>
+      <tns:policy_info>
+        <tns:policy_num>20UENLW3413</tns:policy_num>
+        <tns:policy_eff_date>2018-04-02</tns:policy_eff_date>
+        <tns:policy_exp_date>2019-04-02</tns:policy_exp_date>
+        <tns:policy_state>CT</tns:policy_state>
+      </tns:policy_info>
+      <tns:import_reason>All Other</tns:import_reason>
+      <tns:referral_src>E</tns:referral_src>
+      <tns:referral_id>1</tns:referral_id>
+      <tns:referral_note>Exposure:(1) 1st PartyVehicle - TEST|Catg:Vehicle Theft/Fraud|Indicator%:40|Indicators:Vehicle registration renewal time is close to the reported date of theft.|InvToDate:|Yes-Sent affidavit of theft/fire,Assigned for appraisal/inspection,Ordered police report,Ordered police recovery report (if vehicle recovered),Ordered fire report and/ or considered origin and cause (if vehicle recovered burnt),Validated and/ updated VIN Number,Verified Coverage|Ask SIU-Contacted all parties involved,Obtained recorded statement of all parties involved,Confirmed name, address, phone, DOB of all parties involved,Checked ISO and claim system for prior losses|Referral Date:Mon Jul 06 07:07:32 EDT 2020</tns:referral_note>
+      <tns:person_info>
+        <tns:person_id>O</tns:person_id>
+        <tns:person_type>Claimant</tns:person_type>
+        <tns:person_uid>cc9pte1:814604050</tns:person_uid>
+        <tns:name>
+          <tns:lastname>TEST</tns:lastname>
+        </tns:name>
+        <tns:address>
+          <tns:addressline1>addressline1</tns:addressline1>
+          <tns:city>city</tns:city>
+          <tns:state>CT</tns:state>
+          <tns:zip>66666</tns:zip>
+          <tns:country>US</tns:country>
+        </tns:address>
+      </tns:person_info>
+      <tns:person_info>
+        <tns:person_id>O</tns:person_id>
+        <tns:person_type>Insured</tns:person_type>
+        <tns:person_uid>cc9pte1:814604050</tns:person_uid>
+        <tns:name>
+          <tns:lastname>TEST</tns:lastname>
+        </tns:name>
+        <tns:address>
+          <tns:addressline1>addressline1</tns:addressline1>
+          <tns:city>city</tns:city>
+          <tns:state>CT</tns:state>
+          <tns:zip>66666</tns:zip>
+          <tns:country>US</tns:country>
+        </tns:address>
+      </tns:person_info>
+      <tns:person_info>
+        <tns:person_id>I</tns:person_id>
+        <tns:person_type>Referral Requestor</tns:person_type>
+        <tns:person_uid>pte1026</tns:person_uid>
+        <tns:name>
+          <tns:lastname>lnamepte1026</tns:lastname>
+          <tns:firstname>fnamepte1026</tns:firstname>
+        </tns:name>
+        <tns:address>
+          <tns:country>US</tns:country>
+        </tns:address>
+        <tns:phone>999-999-9999</tns:phone>
+      </tns:person_info>
+      <tns:person_info>
+        <tns:person_id>I</tns:person_id>
+        <tns:person_type>Primary Adjuster / Claim Handler</tns:person_type>
+        <tns:person_uid>MF88149</tns:person_uid>
+        <tns:name>
+          <tns:lastname>Lazzzine</tns:lastname>
+          <tns:firstname>Dezzzandra</tns:firstname>
+        </tns:name>
+        <tns:address>
+          <tns:addressline1>addressline1</tns:addressline1>
+          <tns:city>city</tns:city>
+          <tns:state>KY</tns:state>
+          <tns:country>US</tns:country>
+        </tns:address>
+        <tns:phone>888-888-888 x888888</tns:phone>
+      </tns:person_info>
+      <tns:person_info>
+        <tns:person_id>O</tns:person_id>
+        <tns:person_type>Writing Company</tns:person_type>
+        <tns:name>
+          <tns:lastname>Hartford Casualty Insurance Company</tns:lastname>
+        </tns:name>
+      </tns:person_info>
+      <tns:person_info>
+        <tns:person_id>O</tns:person_id>
+        <tns:person_type>Master Agent</tns:person_type>
+        <tns:person_uid>cc9pte1:814604052</tns:person_uid>
+        <tns:name>
+          <tns:lastname>MASTER AGENT ALLIANCE LLC</tns:lastname>
+        </tns:name>
+        <tns:agency_code>222222</tns:agency_code>
+        <tns:agency_master_code>222222</tns:agency_master_code>
+        <tns:address>
+          <tns:addressline1>addressline1</tns:addressline1>
+          <tns:city>city</tns:city>
+          <tns:state>TN</tns:state>
+          <tns:zip>66666</tns:zip>
+          <tns:country>US</tns:country>
+        </tns:address>
+        <tns:phone>222-222-2222</tns:phone>
+        <tns:JTC_affiliation>No</tns:JTC_affiliation>
+        <tns:VIP_agent_indicator>None</tns:VIP_agent_indicator>
+      </tns:person_info>
+      <tns:person_info>
+        <tns:person_id>O</tns:person_id>
+        <tns:person_type>Agent</tns:person_type>
+        <tns:person_uid>cc9pte1:814604051</tns:person_uid>
+        <tns:name>
+          <tns:lastname>AGENT INSURANCE</tns:lastname>
+        </tns:name>
+        <tns:agency_code>222222</tns:agency_code>
+        <tns:agency_master_code>222222</tns:agency_master_code>
+        <tns:address>
+          <tns:addressline1>addressline1</tns:addressline1>
+          <tns:city>city</tns:city>
+          <tns:state>TN</tns:state>
+          <tns:zip>11111</tns:zip>
+          <tns:country>US</tns:country>
+        </tns:address>
+        <tns:phone>111-111-1111</tns:phone>
+        <tns:JTC_affiliation>No</tns:JTC_affiliation>
+        <tns:VIP_agent_indicator>None</tns:VIP_agent_indicator>
+      </tns:person_info>
+	  
+    </tns:ReferralRequest>
+  </tns:Body>
+</tns:Envelope>

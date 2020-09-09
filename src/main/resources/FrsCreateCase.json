@@ -1,0 +1,100 @@
+{
+   "claimNumber": "4004935020101031",
+   "lossDateTime": "Fri Mar 01 01:00:00 EST 2019",
+   "accidentType": "036",
+   "lossLocationState": "Maryland",
+   "claimPID": "cc:3108",
+   "fcc": "05",
+   "policyInfo": {
+     "policyType": "AUTO",
+     "policyNumber": "3028713513",
+     "policyPeriod": "12/12/2018 - 06/12/2019",
+     "policyEffectiveDate": "Fri Mar 01 01:00:00 EST 2019",
+     "insured" : "cc:4016",
+     "policyResidenceState": "Maryland",
+     "policyZipCode": "21201",
+     "ratedState" : "Maryland"
+   },
+   "contactInfo": [
+     {
+       "contactPID": "cc:4016",
+       "firstName": "Firstname",
+       "middleName" : "Park",
+       "lastName": "Uibttsuashxsyrv",
+       "dateOfBirth": "06/06/66",
+       "roles": [
+         "driver",
+         "insured"
+       ],
+       "incidentInfo": {
+         "driverPID": "cc:4016",
+         "ownerPID": "cc:4016",
+         "areaOfDamages": ["Hood", "Grille", "FrontBumper"],
+         "vehiclePID": "cc:3211",
+         "make": "FORD",
+         "year": "2007",
+         "model": "EDGE",
+         "vehicleStyle": "auto",
+         "vehicleVIN": "1FMBK46CX71061493",
+         "incidentPID": "cc:3511",
+         "incidentType": "VehicleIncident",
+         "exposureInfo":[{
+           "exposureType": "COLLISION",
+           "exposureReserveLines": ["COLLISION", "PAYOUT"]
+         }]
+       },
+       "primaryAddress": {
+         "addressLine1": "Uibttsuashxsyrv",
+         "city": "Baltimore",
+         "state": "MD",
+         "zipCode": "21201",
+         "country": "US"
+       }
+     },
+   {
+     "contactPID": "cc:4017",
+     "firstName": "Passenger",
+     "middleName" : "Park",
+     "lastName": "Uibttsuashxsyrv",
+     "dateOfBirth": "06/06/67",
+     "roles": [
+       "passenger"
+     ],
+     "primaryAddress": {
+       "addressLine1": "Uibttsuashxsyrv",
+       "city": "Baltimore",
+       "state": "MD",
+       "zipCode": "21201",
+       "country": "US"
+     }
+   },
+   {
+     "contactPID": "cc:2456",
+     "firstName": "Sam",
+     "lastName": "Don",
+     "middleName" : "Park",
+     "phoneNumber" : "240-332-8769",
+     "racFid" : "23452",
+     "emailAddress" : "sdon@aol.com"
+   },
+   {
+     "contactPID": "cc:5367",
+     "firstName": "Syndee",
+     "lastName": "Payne",
+     "middleName" : "Park",
+     "phoneNumber" : "240-332-8760",
+     "racFid" : "23452",
+     "emailAddress" : "spayne@aol.com"
+   }
+   ],
+   "referralInfo": {
+     "siuReferralPublicID": "cc:9999",
+     "referralStatus": "Sent",
+     "referralNumber": "S4004935020101031-1",
+     "referralReason": "ClaimIssue",
+     "referralType": "SuspectedClaimFraud",
+     "referralSubject": "Test",
+     "referredBy": "cc:2456",
+     "fileOwner": "cc:5367"
+   }
+}

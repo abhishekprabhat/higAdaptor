@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (C) 2020 Polonious Pty Ltd. All rights reserved This software is the confidential
+    and proprietary information of Polonious Pty Ltd. You shall not disclose such confidential
+    information and shall use it only in accordance with the terms of the license agreement you
+    entered into with Polonious Pty Ltd.
+
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>au.com.polonious</groupId>
+	<artifactId>pims-frs</artifactId>
+	<version>20.1.0</version>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.5.RELEASE</version>
+	</parent>
+	<properties>
+		<java.version>1.8</java.version>
+		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
+                <license.dir>${basedir}</license.dir>
+        </properties>
+
+
+
+        <name>FRS Create Case Microservice</name>
+        <description>Create case and related data from REST POST</description>
+        <url>http://www.polonious.com.au</url>
+        <inceptionYear>2020</inceptionYear>
+        <licenses>
+            <license>
+                 <name>Polonious End User License Agreement (Proprietary)</name>
+                 <url>https://www.polonious.com.au</url>
+                 <comments>Licensed per user of the system</comments>
+            </license>
+        </licenses>
+        <organization>
+            <name>Polonious Pty Ltd</name>
+            <url>http://www.polonious.com.au</url>
+        </organization>
+	<dependencies>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- If this war ships inside tomcat, this dependency (below) reduces the size of the war
+		     as it remove the internal tomcat code.	--> 
+		<!--<dependency>-->
+		   <!--<groupId>org.springframework.boot</groupId>-->
+		   <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+		   <!--<scope>provided</scope>-->
+		<!--</dependency>-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.16</version>
+		</dependency>
+
+		<!--For XML consumption in API -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+			<!--<version>2.11.0</version>-->
+			<!--<type>bundle</type>-->
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>2.0.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+			<version>2.0.1.RELEASE</version>
+		</dependency>
+
+		<!-- To enable JSP -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<!--<scope>provided</scope>-->
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<finalName>pims-frs</finalName>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</repository>
+		<repository>
+			<id>org.jboss.repository.releases</id>
+			<name>JBoss Maven Release Repository</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-releases</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!--<packaging>war</packaging>-->
+</project>
