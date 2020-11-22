@@ -31,8 +31,8 @@ public class ReferralController {
     }
 
     @PostMapping(value = "test/outbound/referral2",
-            consumes = { MediaType.APPLICATION_XML_VALUE})
-    public List<ReferralInquiryRequest.ReferralInquiry> referralXmlTest2(@RequestBody List<ReferralInquiryRequest.ReferralInquiry> payload){
+            consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
+    public ReferralInquiryRequest referralXmlTest2(@RequestBody ReferralInquiryRequest payload){
         return payload;
     }
 }
