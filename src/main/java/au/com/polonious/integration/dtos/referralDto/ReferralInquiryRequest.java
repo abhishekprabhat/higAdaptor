@@ -17,8 +17,8 @@ public class ReferralInquiryRequest {
     @JsonProperty("Credential")
     private Credential credential;
 
-    @JsonProperty("ReferralInquiry")
-//    @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
+//    @JsonProperty("ReferralInquiry")
+    @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq", localName = "ReferralInquiry")
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<ReferralInquiry> arrayList;
 
