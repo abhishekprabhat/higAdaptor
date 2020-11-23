@@ -1,8 +1,10 @@
 package au.com.polonious.integration.controller;
 
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryRequest;
+import au.com.polonious.integration.dtos.referralDto.ReferralInquiryResponse;
 import au.com.polonious.integration.service.ReferralService;
 import au.com.polonious.integration.service.impl.ReferralRecord;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
+@Log
 public class ReferralController {
     @Autowired
     ReferralService referralService;
@@ -32,7 +35,10 @@ public class ReferralController {
 
     @PostMapping(value = "test/outbound/referral2",
             consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
-    public ReferralInquiryRequest referralXmlTest2(@RequestBody ReferralInquiryRequest payload){
-        return payload;
+    public ReferralInquiryResponse referralXmlTest2(@RequestBody ReferralInquiryRequest payload){
+        return ReferralInquiryResponse.builder().request_id("3280")
+                .status("success")
+                .build();
+//        return payload;
     }
 }
