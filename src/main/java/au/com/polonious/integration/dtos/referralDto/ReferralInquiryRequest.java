@@ -11,27 +11,23 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown=true)
-@JacksonXmlRootElement(namespace = "urn:stackify:jacksonxml", localName = "ReferralInquiryRq")
+@JacksonXmlRootElement(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq", localName = "ReferralInquiryRq")
 public class ReferralInquiryRequest {
-    @JacksonXmlProperty
+    @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
     @JsonProperty("Credential")
     private Credential credential;
-    @JsonProperty("ReferralInquiry")
 
-//    @JacksonXmlProperty
+    @JsonProperty("ReferralInquiry")
+//    @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<ReferralInquiry> arrayList;
-    @JacksonXmlProperty
+
+    @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
     private String request_id;
 
     @Data
     public static class Credential{
+        @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
         String username;
-    }
-    @Data
-    @JacksonXmlRootElement(localName = "ReferralInquiry")
-    public static class ReferralInquiry{
-        String exposure_number;
-        String special_program;
     }
 }
