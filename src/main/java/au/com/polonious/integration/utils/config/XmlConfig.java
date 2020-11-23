@@ -1,4 +1,4 @@
-package au.com.polonious.integration.config;
+package au.com.polonious.integration.utils.config;
 
 import com.ctc.wstx.api.WstxOutputProperties;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;

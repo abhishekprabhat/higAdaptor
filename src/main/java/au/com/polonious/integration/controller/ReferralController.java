@@ -20,7 +20,7 @@ public class ReferralController {
     ReferralService referralService;
 
     @PostMapping(value = "/loadReferrals", produces = { MediaType.APPLICATION_XML_VALUE })
-    public ResponseEntity<List<ReferralRecord>> uploadFile(@RequestParam("file") MultipartFile file){
+    public ResponseEntity<Object> uploadFile(@RequestParam("file") MultipartFile file){
         return ResponseEntity.ok(referralService.prepareReferrals(file));
     }
 

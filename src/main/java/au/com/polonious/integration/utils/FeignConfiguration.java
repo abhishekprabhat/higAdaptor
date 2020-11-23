@@ -13,7 +13,7 @@ public class FeignConfiguration implements RequestInterceptor{
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        if (token.isEmpty()) token = PoloniusUtil.getToken();
+//        if (token.isEmpty()) token = PoloniusUtil.getToken();
 
         if (token != null && !token.isEmpty())
             requestTemplate.header("Authorization", "Bearer "+ token);
