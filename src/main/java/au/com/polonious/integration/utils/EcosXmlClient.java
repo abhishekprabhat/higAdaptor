@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface EcosXmlClient {
     @PostMapping(value = "test/outbound/referral2",
             consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
-    ReferralInquiryResponse referralXmlTest2(@RequestBody ReferralInquiryRequest payload);
+    ReferralInquiryRequest referralXmlTest2(@RequestBody ReferralInquiryRequest payload);
 }

@@ -35,10 +35,11 @@ public class ReferralController {
 
     @PostMapping(value = "test/outbound/referral2",
             consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
-    public ReferralInquiryResponse referralXmlTest2(@RequestBody ReferralInquiryRequest payload){
-        return ReferralInquiryResponse.builder().request_id("3280")
-                .status("success")
-                .build();
-//        return payload;
+    public ReferralInquiryRequest referralXmlTest2(@RequestBody ReferralInquiryRequest payload){
+//        public ReferralInquiryResponse referralXmlTest2(@RequestBody ReferralInquiryRequest payload){
+//        return ReferralInquiryResponse.builder().request_id("3280")
+//                .status("success")
+//                .build();
+        return payload;
     }
 }
