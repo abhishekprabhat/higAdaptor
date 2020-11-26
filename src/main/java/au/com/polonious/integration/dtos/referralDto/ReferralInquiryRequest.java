@@ -2,6 +2,7 @@ package au.com.polonious.integration.dtos.referralDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown=true)
+@JsonPropertyOrder({ "credential", "arrayList", "request_id"})
 @JacksonXmlRootElement(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq", localName = "ReferralInquiryRq")
 public class ReferralInquiryRequest {
     @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
@@ -29,5 +31,7 @@ public class ReferralInquiryRequest {
     public static class Credential{
         @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
         String username;
+        @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
+        String password;
     }
 }

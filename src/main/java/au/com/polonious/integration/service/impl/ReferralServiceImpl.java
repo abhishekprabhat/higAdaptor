@@ -37,10 +37,12 @@ public class ReferralServiceImpl implements ReferralService{
             ReferralInquiryRequest referralInquiryRequest = new ReferralInquiryRequest();
             ReferralInquiryRequest.Credential credential = new ReferralInquiryRequest.Credential();
             credential.setUsername("CFMIntegUser");
+
             referralInquiryRequest.setCredential(credential);
-            referralInquiryRequest.setRequest_id("3280");
 
             referralInquiryRequest.setArrayList(rawTables.stream().map(c -> mapToReferralRequest(c)).collect(Collectors.toList()));
+
+            referralInquiryRequest.setRequest_id("3280");
 
             return ecosXmlClient.referralXmlTest2(referralInquiryRequest);
 //            return rawTables;
