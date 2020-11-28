@@ -72,9 +72,9 @@ public class EcosController {
         //  Map Ecos Xml payload to EcosCreateCaseDto as required by Polonius
         PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload.getBody().getReferralRequest());
 
-        ObjectMapper mapper = new ObjectMapper();
-
-        String dtoAsString = mapper.writeValueAsString(poloniusCreateCaseDto);
+//        ObjectMapper mapper = new ObjectMapper();
+//
+//        String dtoAsString = mapper.writeValueAsString(poloniusCreateCaseDto);
 
 
         //  Use the above created payload to create a case in Polonius system

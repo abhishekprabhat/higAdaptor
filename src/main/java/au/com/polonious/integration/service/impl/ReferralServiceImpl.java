@@ -3,6 +3,7 @@ package au.com.polonious.integration.service.impl;
 import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
 import au.com.polonious.integration.dtos.ecosDto.ReferralRequest;
 import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
+import au.com.polonious.integration.dtos.referralDto.CreateCaseResponseXml;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiry;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryRequest;
 import au.com.polonious.integration.service.ReferralService;
@@ -64,13 +65,20 @@ public class ReferralServiceImpl implements ReferralService{
     }
 
     @Override
-    public ReferralRequest caseReferralSave(ReferralRequest payload) {
+    public CreateCaseResponseXml caseReferralSave(ReferralRequest payload) {
         //  Get Token
-        String token = PoloniusUtil.getToken();
+//        String token = PoloniusUtil.getToken();
+//
+//        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload);
+//        FrissResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
 
-        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload);
-        FrissResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
-        return null;
+        CreateCaseResponseXml createCaseResponseXml = CreateCaseResponseXml.builder().body(
+//                CreateCaseResponseXml.Envelope.builder().body(
+                        CreateCaseResponseXml.Body.builder().referralMessage(
+                                CreateCaseResponseXml.Body.ReferralMessage.builder().status("success").build()
+//                        ).build()
+                ).build()).build();
+        return createCaseResponseXml;
     }
 
     private ReferralInquiry mapToReferralRequest(ReferralRecord referralRecord) {

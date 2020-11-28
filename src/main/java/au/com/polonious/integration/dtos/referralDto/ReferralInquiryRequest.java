@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonPropertyOrder({ "credential", "arrayList", "request_id"})
-@JacksonXmlRootElement(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq", localName = "ReferralInquiryRq")
+@JacksonXmlRootElement(namespace = "http://schemas.xmlsoap.org/soap/envelope/", localName = "ReferralInquiryRq")
 public class ReferralInquiryRequest {
     @JacksonXmlProperty(namespace = "http://www.thehartford.com/Claims/SIU/ReferralInquiryRq")
     @JsonProperty("Credential")
