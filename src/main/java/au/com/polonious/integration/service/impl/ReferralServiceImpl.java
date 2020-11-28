@@ -73,11 +73,10 @@ public class ReferralServiceImpl implements ReferralService{
 //        FrissResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
 
         CreateCaseResponseXml createCaseResponseXml = CreateCaseResponseXml.builder().body(
-//                CreateCaseResponseXml.Envelope.builder().body(
-                        CreateCaseResponseXml.Body.builder().referralMessage(
-                                CreateCaseResponseXml.Body.ReferralMessage.builder().status("success").build()
-//                        ).build()
-                ).build()).build();
+                CreateCaseResponseXml.Body.builder().referralMessage(
+                        CreateCaseResponseXml.Body.ReferralMessage.builder().status("success").build()
+                ).build()
+        ).build();
         return createCaseResponseXml;
     }
 
