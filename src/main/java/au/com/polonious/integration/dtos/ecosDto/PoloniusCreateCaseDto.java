@@ -7,7 +7,7 @@ import lombok.Data;
 //@JsonInclude(JsonInclude.Include.ALWAYS)
 //@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.ANY, getterVisibility=JsonAutoDetect.Visibility.NONE,
 //        setterVisibility=JsonAutoDetect.Visibility.NONE, creatorVisibility=JsonAutoDetect.Visibility.NONE)
-public class EcosCreateCaseDto {
+public class PoloniusCreateCaseDto {
 //    @JsonSetter(nulls=Nulls.SKIP)
     String description = "";
     @JsonSetter(nulls=Nulls.SKIP)

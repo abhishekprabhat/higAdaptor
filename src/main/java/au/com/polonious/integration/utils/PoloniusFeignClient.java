@@ -1,7 +1,7 @@
 package au.com.polonious.integration.utils;
 
 
-import au.com.polonious.integration.dtos.ecosDto.EcosCreateCaseDto;
+import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
 import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -14,10 +14,10 @@ import java.util.HashMap;
 
 
 @FeignClient(name = "abc", url = "https://pocusa.poloniouslive.com/", configuration = FeignConfiguration.class)
-public interface EcosFeignClient {
+public interface PoloniusFeignClient {
     @RequestMapping(value = "newview/public/oauth/task/v1/mapping/hcreatecase", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    FrissResponseCreateCase createEcosCase(@RequestBody EcosCreateCaseDto ecosCreateCaseDto);
+    FrissResponseCreateCase createEcosCase(@RequestBody PoloniusCreateCaseDto poloniusCreateCaseDto);
 
     @RequestMapping(value = "newview/public/oauth/task/v1/mapping/hcreatecase", method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

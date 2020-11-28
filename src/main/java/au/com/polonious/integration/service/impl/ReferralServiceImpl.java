@@ -1,9 +1,14 @@
 package au.com.polonious.integration.service.impl;
 
+import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
+import au.com.polonious.integration.dtos.ecosDto.ReferralRequest;
+import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiry;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryRequest;
 import au.com.polonious.integration.service.ReferralService;
 import au.com.polonious.integration.utils.EcosXmlClient;
+import au.com.polonious.integration.utils.PoloniusFeignClient;
+import au.com.polonious.integration.utils.PoloniusUtil;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +25,10 @@ public class ReferralServiceImpl implements ReferralService{
     CsvHelper csvHelper;
     @Autowired
     EcosXmlClient ecosXmlClient;
+    @Autowired
+    Mapper mapper;
+    @Autowired
+    PoloniusFeignClient poloniusFeignClient;
 
     @Override
     public Object prepareReferrals(MultipartFile file) {
@@ -51,6 +60,16 @@ public class ReferralServiceImpl implements ReferralService{
             log.info(String.format("Error Reading file: %s\n%s", file.getName(), e.getMessage()));
         }
 
+        return null;
+    }
+
+    @Override
+    public ReferralRequest caseReferralSave(ReferralRequest payload) {
+        //  Get Token
+        String token = PoloniusUtil.getToken();
+
+        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload);
+        FrissResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
         return null;
     }
 

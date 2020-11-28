@@ -1,5 +1,6 @@
 package au.com.polonious.integration.controller;
 
+import au.com.polonious.integration.dtos.ecosDto.ReferralRequest;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryRequest;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryResponse;
 import au.com.polonious.integration.service.ReferralService;
@@ -41,5 +42,11 @@ public class ReferralController {
 //                .status("success")
 //                .build();
         return payload;
+    }
+
+    @PostMapping(value = "caseReferral",
+            consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
+    public ReferralRequest caseReferralXml(@RequestBody ReferralRequest payload){
+        return referralService.caseReferralSave(payload);
     }
 }

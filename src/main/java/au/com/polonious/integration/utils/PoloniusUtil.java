@@ -1,10 +1,9 @@
 package au.com.polonious.integration.utils;
 
-import au.com.polonious.integration.dtos.ecosDto.EcosCreateCaseDto;
+import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
 import au.com.polonious.integration.dtos.frissDto.FrissCreateCaseDto;
 import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
 import au.com.polonious.integration.dtos.frsDto.ContactInfo;
-import au.com.polonious.integration.dtos.frsDto.CreateCaseDto;
 import au.com.polonious.integration.dtos.frsDto.IncidentInfo;
 import au.com.polonious.integration.polonious.dtos.OAuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 @Service
 public class PoloniusUtil {
@@ -29,7 +27,7 @@ public class PoloniusUtil {
     private static String oAuthUserSecret;
     private static String pimsEcosUrl;
 
-    public static EcosFeignClient ecosFeignClient;
+    public static PoloniusFeignClient poloniusFeignClient;
 
     @Value( "${pimsUrl}" )
     public void setPimsUrl(String url){
@@ -49,8 +47,8 @@ public class PoloniusUtil {
     }
 
     @Autowired
-    public PoloniusUtil (EcosFeignClient ecosFeignClient){
-        PoloniusUtil.ecosFeignClient = ecosFeignClient;
+    public PoloniusUtil (PoloniusFeignClient poloniusFeignClient){
+        PoloniusUtil.poloniusFeignClient = poloniusFeignClient;
     }
     public static String getToken(){
 
@@ -182,7 +180,7 @@ public class PoloniusUtil {
                     personCreate.put("zipCode", contactInfo.getPrimaryAddress().getZipCode());
                     personCreate.put("country", contactInfo.getPrimaryAddress().getCountry());
                 }
-                String personId = ecosFeignClient.createEcosPerson(personCreate);
+                String personId = poloniusFeignClient.createEcosPerson(personCreate);
 //                HttpEntity<HashMap<String,String>> createPersonRequest = new HttpEntity<HashMap<String,String>>(personCreate,header);
 //                System.out.println("Request body " + createPersonRequest.getBody());
 //                RestTemplate postPersonRestTemplate = new RestTemplate();
@@ -248,7 +246,7 @@ public class PoloniusUtil {
         HttpEntity<HashMap<String,String>> createTprRequest = new HttpEntity<HashMap<String,String>>(tprCreate, header);
 
         try {
-            String taskPersonLinkResult = ecosFeignClient.createEcosPersonTaskLink(tprCreate);
+            String taskPersonLinkResult = poloniusFeignClient.createEcosPersonTaskLink(tprCreate);
             System.out.println("\t Link Creation = " + taskPersonLinkResult);
 //            ResponseEntity<String> response = postTaskPersonRoleRestTemplate
 //                    .exchange(PoloniusUtil.pimsEcosUrl + "/public/oauth/task/v1/taskPersonRole",
@@ -443,7 +441,7 @@ public class PoloniusUtil {
         return stringBuffer.toString().trim();
     }
 
-    public static ResponseEntity<FrissResponseCreateCase> ecosCreateCase(String token, EcosCreateCaseDto ecosCreateCaseDto, String dtoAsString) {
+    public static ResponseEntity<FrissResponseCreateCase> ecosCreateCase(String token, PoloniusCreateCaseDto poloniusCreateCaseDto, String dtoAsString) {
         try{
             System.out.println("Token:"+token);
             HttpHeaders headers = new HttpHeaders();

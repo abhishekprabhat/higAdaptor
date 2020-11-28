@@ -3,13 +3,12 @@ package au.com.polonious.integration.controller;
 import au.com.polonious.integration.dtos.ecosDto.*;
 import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
 import au.com.polonious.integration.dtos.frsDto.ContactInfo;
-import au.com.polonious.integration.dtos.frsDto.PrimaryAddress;
-import au.com.polonious.integration.utils.EcosFeignClient;
+import au.com.polonious.integration.service.impl.Mapper;
+import au.com.polonious.integration.utils.PoloniusFeignClient;
 import au.com.polonious.integration.utils.PoloniusUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
@@ -26,7 +25,9 @@ import java.util.*;
 @Log
 public class EcosController {
     @Autowired
-    EcosFeignClient ecosFeignClient;
+    PoloniusFeignClient poloniusFeignClient;
+    @Autowired
+    Mapper mapper;
     @Autowired
     ResourceLoader resourceLoader;
     final List<String> xmlInput = Arrays.asList("Y2VAC46318_1_SOAP11_OUTBOUND_REQUEST_2020_07_06_T_07_38_03_0760.xml",
@@ -69,15 +70,15 @@ public class EcosController {
         String token = PoloniusUtil.getToken();
 
         //  Map Ecos Xml payload to EcosCreateCaseDto as required by Polonius
-        EcosCreateCaseDto ecosCreateCaseDto = createEcosDto(payload);
+        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload.getBody().getReferralRequest());
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String dtoAsString = mapper.writeValueAsString(ecosCreateCaseDto);
+        String dtoAsString = mapper.writeValueAsString(poloniusCreateCaseDto);
 
 
         //  Use the above created payload to create a case in Polonius system
-        FrissResponseCreateCase createCaseResponse = ecosFeignClient.createEcosCase(ecosCreateCaseDto);
+        FrissResponseCreateCase createCaseResponse = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
 
         //  The conventional RestTemplate tries to send postBody as xml, hence used FeignClient
 //        ResponseEntity<FrissResponseCreateCase> createCaseResponse = PoloniusUtil.ecosCreateCase(token, ecosCreateCaseDto, dtoAsString);
@@ -109,92 +110,12 @@ public class EcosController {
 
         for (int i = 0; i < personObjects.size(); i++) {
             EcosPerson personObject = personObjects.get(i);
-            ContactInfo contactInfo = createContactInfo(personObject);
+            ContactInfo contactInfo = mapper.createContactInfo(personObject);
 
             contactInfoList.add(contactInfo);
         }
         return contactInfoList;
     }
 
-    private ContactInfo createContactInfo(EcosPerson personObject) {
-        ContactInfo contactInfo = new ContactInfo();
-        //  Use person uid as unique identifier. If blank, use a combination of firstName+lastName
-        if (personObject.getPersonUid() != null && !personObject.getPersonUid().isEmpty())
-            contactInfo.setContactPID(personObject.getPersonUid());
-        else{
-            String uniqueId = "" + (personObject.getName().getFirstname()!= null? personObject.getName().getFirstname(): "")
-                    + (personObject.getName().getLastname() != null? ("_"+ personObject.getName().getLastname()): "");
-            contactInfo.setContactPID(uniqueId);
-        }
-
-        //  Makeshift arrangement to filter out personDescriptionType other than Claimant and Insured
-        if (personObject.getPersonType().equals("Claimant") || personObject.getPersonType().equals("Insured"))
-            contactInfo.setPersonTypeDescription(personObject.getPersonType());
-        else contactInfo.setPersonTypeDescription("Staff");
-
-        //  Add a role DRIVER for the time being to test.
-        contactInfo.getRoles().add(personObject.getPersonType());
-
-        contactInfo.setFirstName(personObject.getName().getFirstname());
-        contactInfo.setMiddleName("");
-        contactInfo.setLastName(personObject.getName().getLastname());
-        contactInfo.setPrimaryAddress(createAddress(personObject.getAddress()));
-        contactInfo.setPhoneNumber(personObject.getPhone());
-        return contactInfo;
-    }
-    private PrimaryAddress createAddress(EcosAddress addressObject){
-        if (addressObject == null) return null;
-        PrimaryAddress primaryAddress = new PrimaryAddress();
-
-        if (addressObject.getAddressline1() != null) primaryAddress.setAddressLine1(addressObject.getAddressline1());
-        if (addressObject.getCity() != null) primaryAddress.setCity(addressObject.getCity());
-        if (addressObject.getZip() != null) primaryAddress.setZipCode(addressObject.getZip());
-        if (addressObject.getCountry() != null) primaryAddress.setCountry(addressObject.getCountry());
-        return primaryAddress;
-    }
-
-    private EcosCreateCaseDto createEcosDto(EcosPayloadDto payload) {
-        ReferralRequest referralRequest = payload.getBody().getReferralRequest();
-        EcosCreateCaseDto ecosCreateCaseDto = new EcosCreateCaseDto();
-        ecosCreateCaseDto.setDescription("");
-        ecosCreateCaseDto.setLossState2("California");
-        ecosCreateCaseDto.setLob(referralRequest.getClaimInfo().getLob());
-        ecosCreateCaseDto.setBusinessTypeDesc(referralRequest.getClaimInfo().getBusinessTypeDesc());
-
-        ecosCreateCaseDto.setLossDate(referralRequest.getClaimInfo().getLossDate());
-        ecosCreateCaseDto.setLossLocAddrLine1(referralRequest.getClaimInfo().getLossLocation().getAddressline1());
-        ecosCreateCaseDto.setLossLocCity(referralRequest.getClaimInfo().getLossLocation().getCity());
-        ecosCreateCaseDto.setLossLocState(referralRequest.getClaimInfo().getLossLocation().getState());
-        ecosCreateCaseDto.setLossLocCountry(referralRequest.getClaimInfo().getLossLocation().getCountry());
-        ecosCreateCaseDto.setLossLocZip(referralRequest.getClaimInfo().getLossLocation().getZip());
-
-        ecosCreateCaseDto.setBusinessTypeCode(referralRequest.getClaimInfo().getBusinessTypeCode());
-        ecosCreateCaseDto.setClaim_sym(referralRequest.getClaimInfo().getClaim_sym());
-        ecosCreateCaseDto.setClaimDesc(referralRequest.getClaimInfo().getClaimDesc());
-        ecosCreateCaseDto.setClaimNumber(referralRequest.getClaimInfo().getClaimNumber());
-        ecosCreateCaseDto.setClaimOffice(referralRequest.getClaimInfo().getClaimOffice());
-        ecosCreateCaseDto.setClaimPlusIndicator(referralRequest.getClaimInfo().getClaimPlusIndicator());
-        ecosCreateCaseDto.setClaimStatusAtReferral(referralRequest.getClaimInfo().getClaimStatusAtReferral());
-        ecosCreateCaseDto.setEventNum(referralRequest.getClaimInfo().getEventNum());
-        ecosCreateCaseDto.setExposureId(referralRequest.getClaimInfo().getExposureId());
-        ecosCreateCaseDto.setFinancialTotalReserves(referralRequest.getClaimInfo().getFinancialTotalReserves().getTotalReserves());
-        ecosCreateCaseDto.setHubOffice(referralRequest.getClaimInfo().getHubOffice());
-        ecosCreateCaseDto.setImportReason(referralRequest.getImportReason());
-        ecosCreateCaseDto.setLargeLoss(referralRequest.getClaimInfo().getLargeLoss());
-        ecosCreateCaseDto.setLossDesc(referralRequest.getClaimInfo().getLossDesc());
-
-        ecosCreateCaseDto.setPolicyState(referralRequest.getPolicyInfo().getPolicyState());
-        ecosCreateCaseDto.setPolicyEffectiveDate(referralRequest.getPolicyInfo().getPolicyEffectiveDate());
-        ecosCreateCaseDto.setPolicyExpiryDate(referralRequest.getPolicyInfo().getPolicyExpiryDate());
-        ecosCreateCaseDto.setPolicyNum(referralRequest.getPolicyInfo().getPolicyNum());
-        ecosCreateCaseDto.setPolicyOrigEffectiveDate(referralRequest.getPolicyInfo().getPolicyOrigEffectiveDate());
-        ecosCreateCaseDto.setPolicyState2("California");
-
-        ecosCreateCaseDto.setReferralId(referralRequest.getReferralId());
-        ecosCreateCaseDto.setReferralSource(referralRequest.getReferralSource());
-        if(referralRequest.getReferralNote() != null)
-            ecosCreateCaseDto.setReferralNote(referralRequest.getReferralNote().replace("|", "\n"));
-        return ecosCreateCaseDto;
-    }
 
 }
