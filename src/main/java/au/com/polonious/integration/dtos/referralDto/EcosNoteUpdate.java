@@ -29,6 +29,7 @@ public class EcosNoteUpdate {
     @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
     InvestigationNote investigation_note;
 
+    @Data
     public static class InvestigationNote{
         @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
         String note_type;

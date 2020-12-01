@@ -55,7 +55,7 @@ public class ReferralController {
         return payload;
     }
     @PostMapping(value = "caseNoteUpdate",
-            consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
+            consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
     public EcosNoteUpdate ecosNoteUpdate(@RequestBody EcosNoteUpdate payload){
         return payload;
     }
