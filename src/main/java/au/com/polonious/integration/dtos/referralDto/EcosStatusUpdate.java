@@ -10,29 +10,30 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown=true)
-@JsonPropertyOrder({ "credential", "claim_Info", "referral_source", "referral_id", "referralDecision", "referralStatus"})
+@JsonPropertyOrder({ "credential", "claim_info", "referralSource", "referral_id", "referralDecision", "referralStatus"})
 @JacksonXmlRootElement(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "ReferralRequest")
 public class EcosStatusUpdate {
     @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-//    @JsonProperty("Credential")
+//    @JsonProperty("CC")
     private Credential credential;
 
-    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-    @JsonProperty("claim_info")
-    private ClaimInfo claim_Info;
+    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "claim_info")
+//    @JsonProperty("claim_info")
+    private ClaimInfo claimInfo;
 
-    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-    String referral_source;
+    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "referral_src")
+    String referralSource;
     @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
     String referral_id;
 
-    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
+    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "referral_decision")
     ReferralDecision referralDecision;
-    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
+    @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "referral_status")
     ReferralStatus referralStatus;
 
     @Data
     @Builder
+    @JsonIgnoreProperties(ignoreUnknown=true)
     public static class ClaimInfo {
         @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
         String request_level;
