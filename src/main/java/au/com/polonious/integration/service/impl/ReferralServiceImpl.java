@@ -67,7 +67,7 @@ public class ReferralServiceImpl implements ReferralService{
     @Override
     public CreateCaseResponseXml caseReferralSave(ReferralRequest payload) {
         //  Get Token
-//        String token = PoloniusUtil.getToken();
+        String token = PoloniusUtil.getToken();
 //
 //        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload);
 //        FrissResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);

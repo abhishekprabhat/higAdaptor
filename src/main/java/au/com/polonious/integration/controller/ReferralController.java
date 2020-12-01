@@ -2,6 +2,7 @@ package au.com.polonious.integration.controller;
 
 import au.com.polonious.integration.dtos.ecosDto.ReferralRequest;
 import au.com.polonious.integration.dtos.referralDto.CreateCaseResponseXml;
+import au.com.polonious.integration.dtos.referralDto.EcosStatusUpdate;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryRequest;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryResponse;
 import au.com.polonious.integration.service.ReferralService;
@@ -49,5 +50,11 @@ public class ReferralController {
             consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
     public CreateCaseResponseXml caseReferralXml(@RequestBody ReferralRequest payload){
         return referralService.caseReferralSave(payload);
+    }
+
+    @PostMapping(value = "caseStatusUpdate",
+            consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
+    public EcosStatusUpdate referralXmlTest2(@RequestBody EcosStatusUpdate payload){
+        return payload;
     }
 }
