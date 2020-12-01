@@ -17,11 +17,9 @@ import lombok.Data;
 @JacksonXmlRootElement(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "ReferralRequest")
 public class EcosStatusUpdate {
     @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-//    @JsonProperty("CC")
     private Credential credential;
 
     @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "claim_info")
-//    @JsonProperty("claim_info")
     private ClaimInfo claimInfo;
 
     @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "referral_src")
