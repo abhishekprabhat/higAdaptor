@@ -1,10 +1,8 @@
 package au.com.polonious.integration.dtos.referralDto;
 
-import au.com.polonious.integration.dtos.referralDto.ecosUpdate.ClaimInfo;
 import au.com.polonious.integration.dtos.referralDto.ecosUpdate.Credential;
 import au.com.polonious.integration.dtos.referralDto.ecosUpdate.ReferralDecision;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -43,6 +41,22 @@ public class EcosStatusUpdate {
         String change_date;
         @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
         String operator;
+    }
+
+    @Data
+    @Builder
+    @JsonIgnoreProperties(ignoreUnknown=true)
+    public static class ClaimInfo {
+        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
+        String request_level;
+        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
+        String exposure_id;
+        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
+        String claim_num;
+        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
+        String claim_sym;
+        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
+        String claim_office;
     }
 
 }
