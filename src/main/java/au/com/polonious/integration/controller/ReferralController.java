@@ -49,9 +49,14 @@ public class ReferralController {
         return referralService.caseReferralSave(payload);
     }
 
-    @PostMapping(value = "caseStatusUpdate",
+    @PostMapping(value = "caseStatusUpdate/xml",
             consumes = { MediaType.APPLICATION_XML_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
     public EcosStatusUpdate referralXmlTest2(@RequestBody EcosStatusUpdate payload){
+        return payload;
+    }
+    @PostMapping(value = "caseStatusUpdate",
+            consumes = { MediaType.APPLICATION_JSON_VALUE}, produces = { MediaType.APPLICATION_XML_VALUE})
+    public EcosStatusUpdate ecosStatusUpdate(@RequestBody EcosStatusUpdate payload){
         return payload;
     }
     @PostMapping(value = "caseNoteUpdate",
