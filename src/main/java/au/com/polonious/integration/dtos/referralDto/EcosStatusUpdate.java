@@ -2,6 +2,7 @@ package au.com.polonious.integration.dtos.referralDto;
 
 import au.com.polonious.integration.dtos.referralDto.ecosUpdate.ClaimInfo;
 import au.com.polonious.integration.dtos.referralDto.ecosUpdate.Credential;
+import au.com.polonious.integration.dtos.referralDto.ecosUpdate.ReferralDecision;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -33,20 +34,6 @@ public class EcosStatusUpdate {
     @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12", localName = "referral_status")
     ReferralStatus referralStatus;
 
-    @Data
-    @Builder
-    public static class ReferralDecision{
-        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-        String decision;
-        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-        String decision_date;
-        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-        String decision_operator;
-        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-        String siu_case_number;
-        @JacksonXmlProperty(namespace = "urn:com.thehartford.claims.siu.referralstatus.types.2007.12")
-        String investigator_assigned;
-    }
     @Data
     @Builder
     public static class ReferralStatus{
