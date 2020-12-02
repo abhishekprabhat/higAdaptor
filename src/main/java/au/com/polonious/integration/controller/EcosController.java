@@ -1,7 +1,7 @@
 package au.com.polonious.integration.controller;
 
 import au.com.polonious.integration.dtos.ecosDto.*;
-import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
+import au.com.polonious.integration.dtos.frissDto.EcosResponseCreateCase;
 import au.com.polonious.integration.dtos.frsDto.ContactInfo;
 import au.com.polonious.integration.service.impl.Mapper;
 import au.com.polonious.integration.utils.PoloniusFeignClient;
@@ -63,7 +63,7 @@ public class EcosController {
             consumes = { MediaType.APPLICATION_XML_VALUE}, // "application/xml;charset=UTF-8",
             produces = { MediaType.APPLICATION_JSON_VALUE }
     )
-    public ResponseEntity<FrissResponseCreateCase> createCase(@RequestBody EcosPayloadDto payload) throws Exception{
+    public ResponseEntity<EcosResponseCreateCase> createCase(@RequestBody EcosPayloadDto payload) throws Exception{
         log.info("Payload " + payload.toString());
 
         //  Get Token
@@ -78,7 +78,7 @@ public class EcosController {
 
 
         //  Use the above created payload to create a case in Polonius system
-        FrissResponseCreateCase createCaseResponse = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
+        EcosResponseCreateCase createCaseResponse = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
 
         //  The conventional RestTemplate tries to send postBody as xml, hence used FeignClient
 //        ResponseEntity<FrissResponseCreateCase> createCaseResponse = PoloniusUtil.ecosCreateCase(token, ecosCreateCaseDto, dtoAsString);

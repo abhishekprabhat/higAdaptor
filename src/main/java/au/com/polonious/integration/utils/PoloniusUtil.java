@@ -1,11 +1,9 @@
 package au.com.polonious.integration.utils;
+	
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
-import au.com.polonious.integration.dtos.frissDto.FrissCreateCaseDto;
-import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
-import au.com.polonious.integration.dtos.frsDto.ContactInfo;
-import au.com.polonious.integration.dtos.frsDto.IncidentInfo;
-import au.com.polonious.integration.polonious.dtos.OAuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -16,8 +14,12 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
+import au.com.polonious.integration.dtos.frissDto.FrissCreateCaseDto;
+import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
+import au.com.polonious.integration.dtos.frsDto.ContactInfo;
+import au.com.polonious.integration.dtos.frsDto.IncidentInfo;
+import au.com.polonious.integration.polonious.dtos.OAuthResponse;
 
 @Service
 public class PoloniusUtil {
@@ -62,11 +64,13 @@ public class PoloniusUtil {
 
 
         RestTemplate restTemplate = new RestTemplate();
+        
+        Map<String, String> map = new HashMap<>();
         try {
             ResponseEntity<OAuthResponse> responseOAuth = restTemplate.
                     postForEntity(
                             fullUrl,
-                            null,
+                            map,
                             OAuthResponse.class);
             System.out.println("Response:"+responseOAuth);
             return responseOAuth.getBody().getAccess_token();

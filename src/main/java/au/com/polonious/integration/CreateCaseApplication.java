@@ -10,15 +10,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 @EnableFeignClients
-public class FrsCreateCaseApplication  extends SpringBootServletInitializer {
+public class CreateCaseApplication  extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(FrsCreateCaseApplication.class);
+		return application.sources(CreateCaseApplication.class);
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(FrsCreateCaseApplication.class, args);
+		SpringApplication.run(CreateCaseApplication.class, args);
 	}
 
 }

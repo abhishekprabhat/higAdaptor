@@ -3,6 +3,7 @@ package au.com.polonious.integration.utils;
 
 import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
 import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
+import au.com.polonious.integration.dtos.frissDto.EcosResponseCreateCase;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,19 +16,19 @@ import java.util.HashMap;
 
 @FeignClient(name = "abc", url = "https://pocusa.poloniouslive.com/", configuration = FeignConfiguration.class)
 public interface PoloniusFeignClient {
-    @RequestMapping(value = "newview/public/oauth/task/v1/mapping/hcreatecase", method = RequestMethod.POST,
+    @RequestMapping(value = "hartford/public/oauth/task/v1/mapping/hcreatecase", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    FrissResponseCreateCase createEcosCase(@RequestBody PoloniusCreateCaseDto poloniusCreateCaseDto);
+    EcosResponseCreateCase createEcosCase(@RequestBody PoloniusCreateCaseDto poloniusCreateCaseDto);
 
-    @RequestMapping(value = "newview/public/oauth/task/v1/mapping/hcreatecase", method = RequestMethod.GET,
+    @RequestMapping(value = "hartford/public/oauth/task/v1/mapping/hcreatecase", method = RequestMethod.GET,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String getEcosPerson(@RequestParam("originalSystemId") String originalSystemId);
 
-    @RequestMapping(value = "newview/public/oauth/person/v3", method = RequestMethod.POST,
+    @RequestMapping(value = "hartford/public/oauth/person/v3", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String createEcosPerson(@RequestBody HashMap<String,String> createPersonRequest);
 
-    @RequestMapping(value = "newview/public/oauth/task/v1/taskPersonRole", method = RequestMethod.POST,
+    @RequestMapping(value = "hartford/public/oauth/task/v1/taskPersonRole", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String createEcosPersonTaskLink(@RequestBody HashMap<String,String> personTaskLink);
 }
