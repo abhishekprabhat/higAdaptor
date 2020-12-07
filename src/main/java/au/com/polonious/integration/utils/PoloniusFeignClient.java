@@ -4,6 +4,7 @@ package au.com.polonious.integration.utils;
 import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
 import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
 import au.com.polonious.integration.dtos.frissDto.EcosResponseCreateCase;
+import au.com.polonious.integration.dtos.referralDto.poloniusDto.AssetDto;
 import au.com.polonious.integration.dtos.referralDto.poloniusDto.CreateCaseDto;
 import au.com.polonious.integration.dtos.referralDto.poloniusDto.PoloniusTaskDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -43,4 +44,8 @@ public interface PoloniusFeignClient {
     @RequestMapping(value = "hartford/public/oauth/task/v1/taskPersonRole", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     String createEcosPersonTaskLink(@RequestBody HashMap<String,String> personTaskLink);
+
+    @RequestMapping(value = "thehartford/public/oauth/asset/v3", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    Long createAsset(@RequestBody AssetDto assetDto);
 }

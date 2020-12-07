@@ -6,6 +6,7 @@ import au.com.polonious.integration.dtos.ecosDto.EcosPerson;
 import au.com.polonious.integration.dtos.ecosDto.ReferralRequest;
 import au.com.polonious.integration.dtos.frsDto.ContactInfo;
 import au.com.polonious.integration.dtos.frsDto.PrimaryAddress;
+import au.com.polonious.integration.dtos.referralDto.poloniusDto.AssetDto;
 import au.com.polonious.integration.dtos.referralDto.poloniusDto.CreateCaseDto;
 import org.springframework.stereotype.Service;
 
@@ -142,5 +143,30 @@ public class Mapper {
                 return matcher.group(1);
             }else return null;
         }).filter(c -> c != null).findFirst().orElse("");
+    }
+
+    public AssetDto extractAsset(ReferralRequest referralRequest) {
+        String[] referralNotes = referralRequest.getReferralNote().split("[|]");
+
+        AssetDto assetDto = AssetDto.builder()
+                .assetTypeDescription("Exposure")
+                .exposureId(referralRequest.getClaimInfo().getExposureId())
+                .description(referralRequest.getClaimInfo().getExposureId())
+                .claimNum(referralRequest.getClaimInfo().getClaimNumber())
+                .claimSym(referralRequest.getClaimInfo().getClaim_sym())
+                .businessTypeCode(referralRequest.getClaimInfo().getBusinessTypeCode())
+                .businessTypeDesc(referralRequest.getClaimInfo().getBusinessTypeDesc())
+                .largeLoss(referralRequest.getClaimInfo().getLargeLoss())
+                .claimPlusIndicator(referralRequest.getClaimInfo().getClaimPlusIndicator())
+                .totalReserves(referralRequest.getClaimInfo().getFinancialTotalReserves().getTotalReserves())
+                .exposure(getField(referralNotes, "Exposure:"))
+//                .catDesc(referralRequest.getClaimInfo())
+//                .injuryCodes(referralRequest.getClaimInfo())
+//                .bodyPart()
+//                .totalIndemnityPayments(referralRequest.getClaimInfo().getFinancialTotalReserves().)
+//                .totalExpensePayments()
+//                .totalRecoveries()
+                .build();
+        return assetDto;
     }
 }
