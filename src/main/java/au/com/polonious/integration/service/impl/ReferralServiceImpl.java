@@ -8,6 +8,7 @@ import au.com.polonious.integration.dtos.referralDto.CreateCaseResponseXml;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiry;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryRequest;
 import au.com.polonious.integration.dtos.referralDto.poloniusDto.CreateCaseDto;
+import au.com.polonious.integration.dtos.referralDto.poloniusDto.PoloniusTaskDto;
 import au.com.polonious.integration.service.ReferralService;
 import au.com.polonious.integration.utils.EcosXmlClient;
 import au.com.polonious.integration.utils.PoloniusFeignClient;
@@ -77,9 +78,24 @@ public class ReferralServiceImpl implements ReferralService{
 
         CreateCaseDto poloniusCreateCaseDto = mapper.getPoloniusCreateCaseDto(payload);
         try {
-            log.info(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(poloniusCreateCaseDto));
-            EcosResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createCaseTask(poloniusCreateCaseDto);
-            log.info(frissResponseCreateCase.toString());
+            String taskId;  //  Task to use used for mapping with asset
+
+            List<PoloniusTaskDto> tasks = poloniusFeignClient.getPoloniusTask(poloniusCreateCaseDto.getEventNum());
+            if (tasks.size() > 1){
+                throw new RuntimeException(String.format("Error: More than one (%s) cases found!", tasks.size()));
+            }else if (tasks.size() == 1){
+                //  Exactly one task found. Use it instead of creating new
+                taskId = String.valueOf(tasks.get(0).getId());
+                log.info(String.format("Found matching task id (%s) for eventNumber %s. Not creating new.", taskId, poloniusCreateCaseDto.getEventNum()));
+
+            }else{
+                log.info(String.format("No existing task found for event number (%s). Creating new ...", poloniusCreateCaseDto.getEventNum()));
+                log.info(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(poloniusCreateCaseDto));
+                EcosResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createCaseTask(poloniusCreateCaseDto);
+                log.info(frissResponseCreateCase.toString());
+
+            }
+
         }catch (Exception ex){
             throw new RuntimeException(ex.getMessage());
         }
