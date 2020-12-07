@@ -113,7 +113,7 @@ public class ReferralServiceImpl implements ReferralService{
                 log.info(String.format("Asset Created (%s)", assetId));
 
                 //  If asset successfully created, then link the asset and task
-                PoloniusUtil.createTaskAssetLink(token, taskId, "Exposure", assetId);
+                PoloniusUtil.createTaskAssetLink(token, taskId, "Car Involved", assetId);
 
             }
         }catch (Exception ex){
