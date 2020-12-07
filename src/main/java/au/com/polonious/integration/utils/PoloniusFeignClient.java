@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.HashMap;
 
 
-@FeignClient(name = "abc", url = "https://pocusa.poloniouslive.com/", configuration = FeignConfiguration.class)
+@FeignClient(name = "abc", url = "https://hartford.poloniouslive.com/", configuration = FeignConfiguration.class)
 public interface PoloniusFeignClient {
-    @RequestMapping(value = "hartford/public/oauth/task/v1/mapping/hcreatecase", method = RequestMethod.POST,
+    @RequestMapping(value = "thehartford/public/oauth/task/v1/mapping/higmapping1", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     EcosResponseCreateCase createEcosCase(@RequestBody PoloniusCreateCaseDto poloniusCreateCaseDto);
 

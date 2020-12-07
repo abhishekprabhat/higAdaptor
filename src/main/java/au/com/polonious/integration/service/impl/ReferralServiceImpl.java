@@ -2,6 +2,7 @@ package au.com.polonious.integration.service.impl;
 
 import au.com.polonious.integration.dtos.ecosDto.PoloniusCreateCaseDto;
 import au.com.polonious.integration.dtos.ecosDto.ReferralRequest;
+import au.com.polonious.integration.dtos.frissDto.EcosResponseCreateCase;
 import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
 import au.com.polonious.integration.dtos.referralDto.CreateCaseResponseXml;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiry;
@@ -68,9 +69,9 @@ public class ReferralServiceImpl implements ReferralService{
     public CreateCaseResponseXml caseReferralSave(ReferralRequest payload) {
         //  Get Token
         String token = PoloniusUtil.getToken();
-//
-//        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload);
-//        FrissResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
+
+        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload);
+        EcosResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
 
         CreateCaseResponseXml createCaseResponseXml = CreateCaseResponseXml.builder().body(
                 CreateCaseResponseXml.Body.builder().referralMessage(
