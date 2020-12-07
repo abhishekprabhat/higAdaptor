@@ -6,7 +6,13 @@ import au.com.polonious.integration.dtos.ecosDto.EcosPerson;
 import au.com.polonious.integration.dtos.ecosDto.ReferralRequest;
 import au.com.polonious.integration.dtos.frsDto.ContactInfo;
 import au.com.polonious.integration.dtos.frsDto.PrimaryAddress;
+import au.com.polonious.integration.dtos.referralDto.poloniusDto.CreateCaseDto;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class Mapper {
@@ -34,7 +40,8 @@ public class Mapper {
         poloniusCreateCaseDto.setClaimStatusAtReferral(referralRequest.getClaimInfo().getClaimStatusAtReferral());
         poloniusCreateCaseDto.setEventNum(referralRequest.getClaimInfo().getEventNum());
         poloniusCreateCaseDto.setExposureId(referralRequest.getClaimInfo().getExposureId());
-        poloniusCreateCaseDto.setFinancialTotalReserves(referralRequest.getClaimInfo().getFinancialTotalReserves().getTotalReserves());
+        if (referralRequest.getClaimInfo().getFinancialTotalReserves() != null)
+            poloniusCreateCaseDto.setFinancialTotalReserves(referralRequest.getClaimInfo().getFinancialTotalReserves().getTotalReserves());
         poloniusCreateCaseDto.setHubOffice(referralRequest.getClaimInfo().getHubOffice());
         poloniusCreateCaseDto.setImportReason(referralRequest.getImportReason());
         poloniusCreateCaseDto.setLargeLoss(referralRequest.getClaimInfo().getLargeLoss());
@@ -91,5 +98,49 @@ public class Mapper {
         return primaryAddress;
     }
 
+    public CreateCaseDto getPoloniusCreateCaseDto(ReferralRequest referralRequest){
+        CreateCaseDto createCaseDto = CreateCaseDto.builder()
+                .description("")
+                .reportedDate(referralRequest.getClaimInfo().getReportedDate())
+//                .claimStatus(referralRequest.getClaimInfo().getClaimStatusAtReferral())
+                .claimDesc(referralRequest.getClaimInfo().getClaimDesc())
+                .lossDate(referralRequest.getClaimInfo().getLossDate())
+                .lossDesc(referralRequest.getClaimInfo().getLossDesc())
+                .addressLine1(referralRequest.getClaimInfo().getLossLocation().getAddressline1())
+                .city(referralRequest.getClaimInfo().getLossLocation().getCity())
+                .state(referralRequest.getClaimInfo().getLossLocation().getState())
+                .zip(referralRequest.getClaimInfo().getLossLocation().getZip())
+                .country(referralRequest.getClaimInfo().getLossLocation().getCountry())
+                .lob(referralRequest.getClaimInfo().getLob())
+                .claimOffice(referralRequest.getClaimInfo().getClaimOffice())
+                .hubOffice(referralRequest.getClaimInfo().getHubOffice())
+                .eventNum(referralRequest.getClaimInfo().getEventNum())
+                .policyNum(referralRequest.getPolicyInfo().getPolicyNum())
+                .policyEffectiveDate(referralRequest.getPolicyInfo().getPolicyEffectiveDate())
+                .policyExpiryDate(referralRequest.getPolicyInfo().getPolicyExpiryDate())
+                .policyState(referralRequest.getPolicyInfo().getPolicyState())
+                .importReason(referralRequest.getImportReason())
+                .referralSource(referralRequest.getReferralSource())
+                .referralId(referralRequest.getReferralId())
+                .build();
 
+        String[] referralNotes = referralRequest.getReferralNote().split("[|]");
+        createCaseDto.setCategory(getField(referralNotes, "Catg:"));
+        createCaseDto.setIndicatorPercent(getField(referralNotes, "Indicator%:"));
+        createCaseDto.setIndicators(getField(referralNotes, "Indicators:"));
+        createCaseDto.setInvToDateYes(getField(referralNotes, "Yes-"));
+        createCaseDto.setInvToDateNo(getField(referralNotes, "No-"));
+        createCaseDto.setReferralDate(getField(referralNotes, "Referral Date:"));
+        return createCaseDto;
+    }
+
+    private String getField(String[] values, String starting){
+        Pattern pattern = Pattern.compile(String.format("^%s(.+)", starting));
+        return Arrays.asList(values).stream().map(c -> {
+            Matcher matcher = pattern.matcher(c);
+            if (matcher.find()){
+                return matcher.group(1);
+            }else return null;
+        }).filter(c -> c != null).findFirst().orElse("");
+    }
 }

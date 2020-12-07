@@ -7,10 +7,13 @@ import au.com.polonious.integration.dtos.frissDto.FrissResponseCreateCase;
 import au.com.polonious.integration.dtos.referralDto.CreateCaseResponseXml;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiry;
 import au.com.polonious.integration.dtos.referralDto.ReferralInquiryRequest;
+import au.com.polonious.integration.dtos.referralDto.poloniusDto.CreateCaseDto;
 import au.com.polonious.integration.service.ReferralService;
 import au.com.polonious.integration.utils.EcosXmlClient;
 import au.com.polonious.integration.utils.PoloniusFeignClient;
 import au.com.polonious.integration.utils.PoloniusUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import feign.FeignException;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +34,8 @@ public class ReferralServiceImpl implements ReferralService{
     Mapper mapper;
     @Autowired
     PoloniusFeignClient poloniusFeignClient;
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Override
     public Object prepareReferrals(MultipartFile file) {
@@ -70,8 +75,14 @@ public class ReferralServiceImpl implements ReferralService{
         //  Get Token
         String token = PoloniusUtil.getToken();
 
-        PoloniusCreateCaseDto poloniusCreateCaseDto = mapper.createEcosDto(payload);
-        EcosResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createEcosCase(poloniusCreateCaseDto);
+        CreateCaseDto poloniusCreateCaseDto = mapper.getPoloniusCreateCaseDto(payload);
+        try {
+            log.info(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(poloniusCreateCaseDto));
+            EcosResponseCreateCase frissResponseCreateCase = poloniusFeignClient.createCaseTask(poloniusCreateCaseDto);
+            log.info(frissResponseCreateCase.toString());
+        }catch (Exception ex){
+            throw new RuntimeException(ex.getMessage());
+        }
 
         CreateCaseResponseXml createCaseResponseXml = CreateCaseResponseXml.builder().body(
                 CreateCaseResponseXml.Body.builder().referralMessage(
